@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const Posts = require("../models/post.model");
 const Users = require("../models/user.models");
+const Categories = require("../models/category.models");
 
 // TODO obtener a un usuario con sus publicaciones
 // * SELECT * FROM users JOIN posts ON users.id=posts.author WHERE users.id=1;
@@ -12,7 +13,7 @@ const Users = require("../models/user.models");
     "posts": [
         {
             "title": "Dudas con Sequelize"
-            category: {
+            "category": {
               name: "Tecnologia"
             }
         }
@@ -30,6 +31,10 @@ router.get("/api/v1/users/:id/posts", async (req, res) => {
       include: {
         model: Posts,
         attributes: ["title", "category_id"],
+        include: {
+          model: Categories,
+          attributes: ["name"],
+        },
       },
     });
     res.json(userPosts);

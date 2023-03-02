@@ -3,6 +3,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const db = require("./utils/database");
 const initModels = require("./models/initModels");
+const userRoutes = require("./routes/user.routes");
 
 initModels();
 
@@ -33,6 +34,8 @@ db.authenticate()
 db.sync({ alter: false }) // alterar los atributos
   .then(() => console.log("Base de datos sync"))
   .catch((error) => console.log(error));
+
+app.use(userRoutes);
 
 app.get("/", (req, res) => {
   res.send("welcome to my API");

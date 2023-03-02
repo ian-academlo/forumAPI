@@ -10,9 +10,11 @@ const Users = db.define("users", {
   },
   name: {
     type: DataTypes.STRING(30),
+    defaultValue: "Jhon",
   },
   lastname: {
     type: DataTypes.STRING(30),
+    defaultValue: "Doe",
   },
   username: {
     type: DataTypes.STRING(30),

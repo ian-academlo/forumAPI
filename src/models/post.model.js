@@ -31,6 +31,7 @@ const Posts = db.define(
   {
     timestamps: true,
     updatedAt: false,
+    createdAt: "posted_at",
   }
 );
 

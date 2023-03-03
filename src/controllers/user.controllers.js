@@ -15,6 +15,21 @@ const createUser = async (req, res) => {
   }
 };
 
+const updateUser = async (req, res) => {
+  try {
+    // necesitamos el id del usuario
+    const { id } = req.params;
+    // la información a actualizar
+    const updateUserData = req.body;
+    // tengo que ir al modelo para consultar la informacion
+    await UsersServices.update(id, updateUserData);
+    res.status(204).send();
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
+
 module.exports = {
   createUser,
+  updateUser,
 };

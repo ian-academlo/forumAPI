@@ -17,6 +17,7 @@ module.exports = router;
 //     Un usuario pueda editar una publicación
 //  Un usuario pueda obtener todas las publicaciones
 // !    Un usuario pueda obtener una publicación con todos sus mensajes
+// !    publicación debe incluir su author al igual que el mensaje
 //   Answers
 //      * Un usuario puede crear una respuesta para una publicación
 //      Un usuario pueda editar su respuesta

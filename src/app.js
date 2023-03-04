@@ -4,6 +4,8 @@ const morgan = require("morgan");
 const db = require("./utils/database");
 const initModels = require("./models/initModels");
 const userRoutes = require("./routes/user.routes");
+const postsRoutes = require("./routes/post.routes");
+const answerRoutes = require("./routes/anwers.routes");
 
 initModels();
 
@@ -36,6 +38,8 @@ db.sync({ alter: false }) // alterar los atributos
   .catch((error) => console.log(error));
 
 app.use(userRoutes);
+app.use(postsRoutes);
+app.use(answerRoutes);
 
 app.get("/", (req, res) => {
   res.send("welcome to my API");

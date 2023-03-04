@@ -14,10 +14,10 @@ module.exports = router;
 // *   editar usuarios
 // ! Posts
 // !    Un usuario pueda crear una publicación
-// !    Un usuario pueda editar una publicación
-// !    Un usuario pueda obtener todas las publicaciones
-// !    Un pueda obtener una publicación con todos sus mensajes
+//     Un usuario pueda editar una publicación
+//  Un usuario pueda obtener todas las publicaciones
+// !    Un usuario pueda obtener una publicación con todos sus mensajes
 //   Answers
-//      Un usuario puede crear una respuesta para una publicación
+//      * Un usuario puede crear una respuesta para una publicación
 //      Un usuario pueda editar su respuesta
 //      Un usuario pueda eliminar su respuesta

@@ -11,6 +11,7 @@ class PostsServices {
         include: [
           {
             model: Users,
+            as: "author_name",
             attributes: ["username"],
           },
           {
@@ -41,6 +42,7 @@ class PostsServices {
         include: [
           {
             model: Users,
+            as: "author_name",
             attributes: ["username"],
           },
           {

@@ -9,7 +9,7 @@ const initModels = () => {
   // * hasMany
 
   Users.hasMany(Posts, { foreignKey: "author" });
-  Posts.belongsTo(Users, { foreignKey: "author" });
+  Posts.belongsTo(Users, { as: "author_name", foreignKey: "author" });
 
   // * Post - Categories
   Categories.hasMany(Posts, { foreignKey: "categoryId" });

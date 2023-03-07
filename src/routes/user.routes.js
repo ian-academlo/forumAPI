@@ -21,7 +21,7 @@ module.exports = router;
 //   Answers
 // *    Un usuario puede crear una respuesta para una publicación
 // TODO     Un usuario pueda editar su respuesta
-// TODO     Un usuario pueda eliminar una respuesta
+// *    Un usuario pueda eliminar una respuesta
 
 /* 
  INICIO

@@ -9,6 +9,17 @@ class AnswerServices {
       throw error;
     }
   }
+
+  static async delete(id) {
+    try {
+      const result = Answers.destroy({
+        where: { id },
+      });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = AnswerServices;

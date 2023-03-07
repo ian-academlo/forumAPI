@@ -15,13 +15,13 @@ module.exports = router;
 // * Posts
 // *    Un usuario pueda crear una publicación
 // TODO Un usuario pueda editar una publicación
-// TODO Un usuario pueda obtener todas las publicaciones
-// !    Un usuario pueda obtener una publicación con todos sus mensajes
-// !    publicación debe incluir su author al igual que el mensaje
+// *    Un usuario pueda obtener todas las publicaciones (!=todas sus )
+// *    Un usuario pueda obtener una publicación con todos sus mensajes
+// *    publicación debe incluir su author al igual que el mensaje
 //   Answers
-//      * Un usuario puede crear una respuesta para una publicación
+// *    Un usuario puede crear una respuesta para una publicación
 // TODO     Un usuario pueda editar su respuesta
-//  TODO    Un usuario pueda eliminar su respuesta
+// TODO     Un usuario pueda eliminar su respuesta
 
 /* 
  INICIO
@@ -64,3 +64,5 @@ module.exports = router;
  message 4
 
 */
+
+// ? buscar a un usuario e incluir todas las publicaciones

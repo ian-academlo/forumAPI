@@ -61,6 +61,17 @@ class PostsServices {
       throw error;
     }
   }
+
+  static async update(newData, id) {
+    try {
+      const result = await Posts.update(newData, {
+        where: { id },
+      });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = PostsServices;

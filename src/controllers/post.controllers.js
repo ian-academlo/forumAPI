@@ -29,8 +29,21 @@ const createPost = async (req, res) => {
   }
 };
 
+const updatePost = async (req, res) => {
+  try {
+    // obtenemos el id de los params
+    const { id } = req.params;
+    const newData = req.body;
+    await PostsServices.update(newData, id);
+    res.status(204).send();
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
+
 module.exports = {
   getAllPosts,
-  createPost,
   getPostWithAnswers,
+  createPost,
+  updatePost,
 };

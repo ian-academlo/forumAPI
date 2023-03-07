@@ -1,5 +1,14 @@
 const PostsServices = require("../services/post.services");
 
+const getAllPosts = async (req, res) => {
+  try {
+    const posts = await PostsServices.getAll();
+    res.json(posts);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
+
 const getPostWithAnswers = async (req, res) => {
   try {
     const { postId } = req.params;
@@ -21,6 +30,7 @@ const createPost = async (req, res) => {
 };
 
 module.exports = {
+  getAllPosts,
   createPost,
   getPostWithAnswers,
 };

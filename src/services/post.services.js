@@ -4,6 +4,27 @@ const Categories = require("../models/category.models");
 const Users = require("../models/user.models");
 
 class PostsServices {
+  static async getAll() {
+    try {
+      const result = await Posts.findAll({
+        attributes: { exclude: ["description", "author", "categoryId"] },
+        include: [
+          {
+            model: Users,
+            attributes: ["username"],
+          },
+          {
+            model: Categories,
+            attributes: ["name"],
+          },
+        ],
+      });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async create(newPost) {
     try {
       const result = await Posts.create(newPost);

@@ -6,10 +6,11 @@ const initModels = require("./models/initModels");
 const userRoutes = require("./routes/user.routes");
 const postsRoutes = require("./routes/post.routes");
 const answerRoutes = require("./routes/anwers.routes");
+const errorHandlerRouter = require("./routes/errorHandler.routes");
 
 initModels();
 
-const app = express();
+const app = express(); // instancia de mi aplicacion
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
@@ -34,9 +35,7 @@ app.get("/", (req, res) => {
   res.send("welcome to my API");
 });
 
-app.use((error, req, res, next) => {
-  res.status(400).json(error);
-});
+errorHandlerRouter(app);
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);

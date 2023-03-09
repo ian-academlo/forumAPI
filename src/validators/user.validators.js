@@ -1,4 +1,4 @@
-const { check, validationResult } = require("express-validator");
+const { check, param } = require("express-validator");
 const validateResult = require("../utils/validate");
 
 const createUserValidator = [
@@ -31,7 +31,25 @@ const createUserValidator = [
   },
 ];
 
-const updateUserValidator = [];
+const updateUserValidator = [
+  param("id").isInt().withMessage("El id debe ser un numero entero"),
+  check("name")
+    .isString()
+    .exists()
+    .withMessage("No se encuentra el nombre para el usuario")
+    .notEmpty()
+    .withMessage("EL nombre no debe ser un string vacio"),
+  check("lastname")
+    .isString()
+    .exists()
+    .withMessage("No se encuentra el nombre para el usuario")
+    .notEmpty()
+    .withMessage("EL nombre no debe ser un string vacio"),
+  // check("email", "El correo no se puede cambiar").not().exists(),
+  (req, res, next) => {
+    validateResult(req, res, next);
+  },
+];
 
 module.exports = {
   createUserValidator,

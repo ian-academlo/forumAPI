@@ -1,11 +1,16 @@
 const { Router } = require("express");
-const { createUserValidator } = require("../validators/user.validators");
+const {
+  createUserValidator,
+  updateUserValidator,
+} = require("../validators/user.validators");
+
 const { createUser, updateUser } = require("../controllers/user.controllers");
 
 const router = Router();
 // TODO username, email, password
+
 router.post("/api/v1/users", createUserValidator, createUser); // controlador
-router.put("/api/v1/users/:id", updateUser);
+router.put("/api/v1/users/:id", updateUserValidator, updateUser);
 
 module.exports = router;
 

@@ -15,9 +15,9 @@ const updateUser = async (req, res) => {
     // necesitamos el id del usuario
     const { id } = req.params;
     // la información a actualizar
-    const updateUserData = req.body;
+    const { name, lastname } = req.body;
     // tengo que ir al modelo para consultar la informacion
-    await UsersServices.update(id, updateUserData);
+    await UsersServices.update(id, { name, lastname });
     res.status(204).send();
   } catch (error) {
     res.status(400).json(error);

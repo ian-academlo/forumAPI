@@ -22,17 +22,6 @@ db.authenticate()
   })
   .catch((error) => console.log(error));
 
-// Crea las tablas si no existen
-// Si existe y hay diferencias modifica la base de datos
-// Si todo esta igual hace caso omiso
-
-// alter --> false
-// force --> false
-
-// * alter: true --> modifico las tablas
-// ! force: true --> elimino toda la estructura de la db
-// ! y la crea nuevamente
-
 db.sync({ alter: false }) // alterar los atributos
   .then(() => console.log("Base de datos sync"))
   .catch((error) => console.log(error));
@@ -43,6 +32,10 @@ app.use(answerRoutes);
 
 app.get("/", (req, res) => {
   res.send("welcome to my API");
+});
+
+app.use((error, req, res, next) => {
+  res.status(400).json(error);
 });
 
 app.listen(PORT, () => {

@@ -6,7 +6,8 @@ const createUser = async (req, res) => {
     const result = await UsersServices.create(newUser);
     res.status(201).json(result);
   } catch (error) {
-    res.status(400).json(error);
+    next(error); // cualquier argumento que le pasemos a
+    // la funcion next sera catalogado como un errror
   }
 };
 

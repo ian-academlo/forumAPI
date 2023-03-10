@@ -11,6 +11,8 @@ const errorHandlerRouter = require("./routes/errorHandler.routes");
 initModels();
 
 const app = express(); // instancia de mi aplicacion
+
+// esto se ejecuta por cada peticion que se hace al servidor
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());

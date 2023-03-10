@@ -1,35 +1,35 @@
 const PostsServices = require("../services/post.services");
 
-const getAllPosts = async (req, res) => {
+const getAllPosts = async (req, res, next) => {
   try {
     const posts = await PostsServices.getAll();
     res.json(posts);
   } catch (error) {
-    res.status(400).json(error);
+    next(error);
   }
 };
 
-const getPostWithAnswers = async (req, res) => {
+const getPostWithAnswers = async (req, res, next) => {
   try {
     const { postId } = req.params;
     const postWithAnswers = await PostsServices.postWithAnswers(postId);
     res.json(postWithAnswers);
   } catch (error) {
-    res.status(400).json(error);
+    next(error);
   }
 };
 
-const createPost = async (req, res) => {
+const createPost = async (req, res, next) => {
   try {
     const newPost = req.body;
     const post = await PostsServices.create(newPost);
     res.status(201).json(post);
   } catch (error) {
-    res.status(400).json(error);
+    next(error);
   }
 };
 
-const updatePost = async (req, res) => {
+const updatePost = async (req, res, next) => {
   try {
     // obtenemos el id de los params
     const { id } = req.params;
@@ -37,7 +37,7 @@ const updatePost = async (req, res) => {
     await PostsServices.update(newData, id);
     res.status(204).send();
   } catch (error) {
-    res.status(400).json(error);
+    next(error);
   }
 };
 

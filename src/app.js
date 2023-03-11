@@ -6,6 +6,7 @@ const initModels = require("./models/initModels");
 const userRoutes = require("./routes/user.routes");
 const postsRoutes = require("./routes/post.routes");
 const answerRoutes = require("./routes/anwers.routes");
+const authRoutes = require("./routes/auth.routes");
 const errorHandlerRouter = require("./routes/errorHandler.routes");
 
 initModels();
@@ -32,6 +33,7 @@ db.sync({ alter: false }) // alterar los atributos
 app.use(userRoutes);
 app.use(postsRoutes);
 app.use(answerRoutes);
+app.use(authRoutes);
 
 app.get("/", (req, res) => {
   res.send("welcome to my API");

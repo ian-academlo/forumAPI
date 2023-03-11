@@ -1,6 +1,18 @@
 const Users = require("../models/user.models");
 
 class UsersServices {
+  static async getUser(email) {
+    try {
+      // SELECT * FROM users where email = email
+      const user = await Users.findOne({
+        where: { email },
+      });
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async create(newUser) {
     try {
       const userCreated = await Users.create(newUser);

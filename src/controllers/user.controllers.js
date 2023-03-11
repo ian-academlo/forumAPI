@@ -1,13 +1,19 @@
 const UsersServices = require("../services/user.services");
+const bcrypt = require("bcrypt");
 
 const createUser = async (req, res) => {
   try {
     const newUser = req.body;
-    const result = await UsersServices.create(newUser);
-    res.status(201).json(result);
+    // newUser = { email, username, password }
+    // * encriptar la contraseña
+    const salt = await bcrypt.genSalt(10);
+    const paswordHash = await bcrypt.hash(newUser.password, salt);
+    // * finaliza encripta la contraseña
+
+    // const result = await UsersServices.create(newUser);
+    res.status(201).json(paswordHash);
   } catch (error) {
-    next(error); // cualquier argumento que le pasemos a
-    // la funcion next sera catalogado como un errror
+    next(error);
   }
 };
 

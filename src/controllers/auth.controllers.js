@@ -1,4 +1,5 @@
 const UserServices = require("../services/user.services");
+const AuthServices = require("../services/auth.services");
 const bcrypt = require("bcrypt");
 
 const userLogin = async (req, res, next) => {
@@ -12,10 +13,6 @@ const userLogin = async (req, res, next) => {
         error: "User not found",
       });
     }
-    // ? donde tenemos la contraseña hasehada
-    // * user.password
-    // ? donde tenemos la contraseña en texto plano
-    // * password
     const isValid = await bcrypt.compare(password, user.password);
     if (!isValid) {
       return next({
@@ -25,12 +22,15 @@ const userLogin = async (req, res, next) => {
       });
     }
     const { id, name, lastname, username } = user;
+    // TODO genera un token y enviarlo al usuario
+    const token = AuthServices.genToken({ id, name, lastname, username });
     res.json({
       id,
       name,
       lastname,
       username,
       email,
+      token,
     });
   } catch (error) {
     next(error);

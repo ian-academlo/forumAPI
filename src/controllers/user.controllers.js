@@ -1,10 +1,22 @@
 const UsersServices = require("../services/user.services");
+const transporter = require("../utils/mailer");
 
 const createUser = async (req, res) => {
   try {
     const newUser = req.body;
+
     const result = await UsersServices.create(newUser);
     res.status(201).json(result);
+    await transporter.sendMail({
+      from: "ian.rosas@gmail.com",
+      to: result.email,
+      subject: "Verifica tu correo electronico",
+      html: `
+        <p>Hola ${result.username} Bienvenido al foro</p>
+        <p> Es necesario que verifiques tu correo </p>
+        <a href="http://localhost:3000/verify/asdhjklñfkjsadhfksfh" target="_blank"> validar correo </a>
+      `,
+    });
   } catch (error) {
     next(error);
   }

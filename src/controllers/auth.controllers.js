@@ -1,6 +1,7 @@
 const UserServices = require("../services/user.services");
 const AuthServices = require("../services/auth.services");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const userLogin = async (req, res, next) => {
   try {
@@ -22,7 +23,7 @@ const userLogin = async (req, res, next) => {
         errorName: "Invalid password",
       });
     }
-    if (!user.isVerified) {
+    if (!user.emailVerified) {
       return next({
         status: 400,
         message: "User email is not verified",
@@ -45,6 +46,40 @@ const userLogin = async (req, res, next) => {
   }
 };
 
+const verifyEmail = async (req, res, next) => {
+  try {
+    const { token } = req.body;
+    console.log(token);
+    // TODO verificar toquen
+    const userData = await jwt.verify(token, "iannacus", {
+      algorithms: "HS512",
+    });
+
+    const user = UserServices.getUser(userData.email);
+
+    if (user.emailVerified) {
+      return next({
+        status: 400,
+        message: "User is already verified",
+        errorName: "Failed to verify email",
+      });
+    }
+
+    await UserServices.update(userData.id, {
+      emailVerified: true,
+    });
+
+    res.status(204).send();
+  } catch (error) {
+    next({
+      status: 400,
+      message: "Invalid or expired token",
+      errorName: error,
+    });
+  }
+};
+
 module.exports = {
   userLogin,
+  verifyEmail,
 };

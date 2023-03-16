@@ -1,3 +1,4 @@
+const AuthServices = require("../services/auth.services");
 const UsersServices = require("../services/user.services");
 const transporter = require("../utils/mailer");
 
@@ -7,6 +8,13 @@ const createUser = async (req, res) => {
 
     const result = await UsersServices.create(newUser);
     res.status(201).json(result);
+    // TODO generar un token
+    const { id, email, username } = result;
+    const token = await AuthServices.genToken({
+      id,
+      email,
+      username,
+    });
     await transporter.sendMail({
       from: "ian.rosas@gmail.com",
       to: result.email,
@@ -14,7 +22,7 @@ const createUser = async (req, res) => {
       html: `
         <p>Hola ${result.username} Bienvenido al foro</p>
         <p> Es necesario que verifiques tu correo </p>
-        <a href="http://localhost:3000/verify/sakldhfksdajfhak" target="_blank"> validar correo </a>
+        <a href="http://localhost:5173/verify?token=${token}" target="_blank"> validar correo </a>
       `,
     });
   } catch (error) {

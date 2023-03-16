@@ -26,7 +26,7 @@ db.authenticate()
   })
   .catch((error) => console.log(error));
 
-db.sync({ alter: false }) // alterar los atributos
+db.sync({ force: false }) // alterar los atributos
   .then(() => console.log("Base de datos sync"))
   .catch((error) => console.log(error));
 

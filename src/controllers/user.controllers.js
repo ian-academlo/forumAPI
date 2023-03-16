@@ -14,7 +14,7 @@ const createUser = async (req, res) => {
       html: `
         <p>Hola ${result.username} Bienvenido al foro</p>
         <p> Es necesario que verifiques tu correo </p>
-        <a href="http://localhost:3000/verify/asdhjklñfkjsadhfksfh" target="_blank"> validar correo </a>
+        <a href="http://localhost:3000/verify/sakldhfksdajfhak" target="_blank"> validar correo </a>
       `,
     });
   } catch (error) {

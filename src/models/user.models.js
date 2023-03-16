@@ -32,6 +32,10 @@ const Users = db.define(
         isEmail: true,
       },
     },
+    emailVerified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,

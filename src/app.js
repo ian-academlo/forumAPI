@@ -11,6 +11,8 @@ const errorHandlerRouter = require("./routes/errorHandler.routes");
 const categoriesRouter = require("./routes/categories.routes");
 initModels();
 
+// insertar puclicaciones en las categorias 1 y 2
+
 const app = express(); // instancia de mi aplicacion
 
 // esto se ejecuta por cada peticion que se hace al servidor

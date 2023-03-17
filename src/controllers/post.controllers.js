@@ -2,7 +2,8 @@ const PostsServices = require("../services/post.services");
 
 const getAllPosts = async (req, res, next) => {
   try {
-    const posts = await PostsServices.getAll();
+    const { categoryId } = req.query;
+    const posts = await PostsServices.getAll(categoryId);
     res.json(posts);
   } catch (error) {
     next(error);

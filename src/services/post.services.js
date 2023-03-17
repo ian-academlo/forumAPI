@@ -4,9 +4,12 @@ const Categories = require("../models/category.models");
 const Users = require("../models/user.models");
 
 class PostsServices {
-  static async getAll() {
+  static async getAll(query) {
     try {
       const result = await Posts.findAll({
+        where: {
+          categoryId: query,
+        },
         attributes: { exclude: ["description", "author", "categoryId"] },
         include: [
           {

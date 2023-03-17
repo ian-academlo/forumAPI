@@ -56,7 +56,7 @@ const verifyEmail = async (req, res, next) => {
     });
 
     const user = UserServices.getUser(userData.email);
-
+    // si el usuario ya se verifico --> envia un error
     if (user.emailVerified) {
       return next({
         status: 400,
@@ -64,7 +64,7 @@ const verifyEmail = async (req, res, next) => {
         errorName: "Failed to verify email",
       });
     }
-
+    // si no se ha verificado --> actualiza el estado de emailVerified
     await UserServices.update(userData.id, {
       emailVerified: true,
     });

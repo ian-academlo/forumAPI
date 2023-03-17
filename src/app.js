@@ -8,7 +8,7 @@ const postsRoutes = require("./routes/post.routes");
 const answerRoutes = require("./routes/anwers.routes");
 const authRoutes = require("./routes/auth.routes");
 const errorHandlerRouter = require("./routes/errorHandler.routes");
-
+const categoriesRouter = require("./routes/categories.routes");
 initModels();
 
 const app = express(); // instancia de mi aplicacion
@@ -34,6 +34,7 @@ app.use(userRoutes);
 app.use(postsRoutes);
 app.use(answerRoutes);
 app.use(authRoutes);
+app.use(categoriesRouter);
 
 app.get("/", (req, res) => {
   res.send("welcome to my API");

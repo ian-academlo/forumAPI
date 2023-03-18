@@ -87,10 +87,13 @@ const posts = [
 ];
 
 db.sync({ force: true }).then(async () => {
-  const result = await Users.bulkCreate(users);
-  if (result) console.log("usuarios creados correctamente");
-  const catResult = await Categories.bulkCreate(categories);
-  if (catResult) console.log("Categorias creadas correctamente");
-  const postResult = await Posts.bulkCreate(posts);
-  if (postResult) console.log("Posts creados satisfactoriamente");
+  users.forEach((user) => {
+    Users.create(user);
+  });
+  setTimeout(async () => {
+    const catResult = await Categories.bulkCreate(categories);
+    if (catResult) console.log("Categorias creadas correctamente");
+    const postResult = await Posts.bulkCreate(posts);
+    if (postResult) console.log("Posts creados satisfactoriamente");
+  }, 400);
 });

@@ -10,7 +10,9 @@ class PostsServices {
         where: {
           categoryId: query,
         },
-        attributes: { exclude: ["description", "author", "categoryId"] },
+        attributes: {
+          exclude: ["description", "author", "categoryId", "craetedAt"],
+        },
         include: [
           {
             model: Users,

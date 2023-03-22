@@ -9,7 +9,7 @@ const authenticate = require("../middlewares/auth.middleware");
 
 const router = Router();
 
-router.get("/api/v1/posts", authenticate, getAllPosts);
+router.get("/api/v1/posts", getAllPosts);
 router.get("/api/v1/posts/:postId/answers", authenticate, getPostWithAnswers);
 router.post("/api/v1/posts", authenticate, createPost);
 router.put("/api/v1/posts/:id", authenticate, updatePost);

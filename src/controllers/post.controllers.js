@@ -10,10 +10,37 @@ const getAllPosts = async (req, res, next) => {
   // ? [ 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, ...rest]
   // ! 50 - offset 65 -> responde 0 y desde donde inicia desde ningun elemento por que no hay
   try {
-    console.log(req.query);
+    console.log(req.query); // { offset= '10', limit= '5', categoryId='2' }
     const { categoryId, offset, limit } = req.query;
     const posts = await PostsServices.getAll(categoryId, offset, limit);
-    res.json(posts);
+    const { count, rows } = posts;
+
+    const url = "localhost:8000/api/v1/posts";
+    // si offset + limit >= count ---> null
+
+    const newOffset = (isNext) => {
+      if (isNext) return Number(offset) + Number(limit);
+
+      return Number(offset) - Number(limit);
+    };
+
+    const nextPage =
+      newOffset(true) >= count
+        ? null
+        : `${url}?offset=${newOffset(true)}&limit=${limit}`;
+    const previousPage =
+      +offset > 0 ? `${url}?offset=${newOffset(false)}&limit=${limit}` : null;
+
+    // ? offset & limit
+
+    const response = {
+      count,
+      next: nextPage,
+      previous: previousPage,
+      posts: rows,
+    };
+
+    res.json(!limit && !offset ? response.posts : response);
   } catch (error) {
     next(error);
   }

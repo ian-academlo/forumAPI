@@ -4,10 +4,10 @@ const Categories = require("../models/category.models");
 const Users = require("../models/user.models");
 
 class PostsServices {
-  static async getAll(query) {
+  static async getAll(query, offset, limit) {
     const filter = query ? { where: { categoryId: query } } : {};
     try {
-      const result = await Posts.findAll({
+      const result = await Posts.findAndCountAll({
         ...filter,
         attributes: {
           exclude: ["description", "author", "categoryId", "craetedAt"],
@@ -23,6 +23,8 @@ class PostsServices {
             attributes: ["name"],
           },
         ],
+        offset, // offset: offset
+        limit, // limit: limit
       });
       return result;
     } catch (error) {

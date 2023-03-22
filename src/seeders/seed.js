@@ -86,6 +86,15 @@ const posts = [
   },
 ];
 
+for (let i = 0; i < 1000; i++) {
+  posts.push({
+    title: `Pregunta sobre basse de datos ${i + 1}`,
+    description: "shalala shalala shala shalalala",
+    author: (i % 6) + 1, // 2, 3 4 5 6 1
+    categoryId: 7,
+  });
+}
+
 db.sync({ force: true }).then(async () => {
   users.forEach((user) => {
     Users.create(user);

@@ -19,6 +19,21 @@
               "schema": { "$ref": "#/components/schemas/login" }
             }
           }
+        },
+        "responses": {
+          "201": {
+            "description": "created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "example": "OK" }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

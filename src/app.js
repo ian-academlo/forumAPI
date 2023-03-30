@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
+require("dotenv").config();
 const swaggerUi = require("swagger-ui-express");
 const swaggerDoc = require("./swagger.json");
 const db = require("./utils/database");
@@ -22,7 +23,7 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 db.authenticate()
   .then(() => {
@@ -34,16 +35,12 @@ db.sync({ force: false }) // alterar los atributos
   .then(() => console.log("Base de datos sync"))
   .catch((error) => console.log(error));
 
-app.use("/api/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.use(userRoutes);
 app.use(postsRoutes);
 app.use(answerRoutes);
 app.use(authRoutes);
 app.use(categoriesRouter);
-
-app.get("/", (req, res) => {
-  res.send("welcome to my API");
-});
+app.use("/api/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 errorHandlerRouter(app);
 

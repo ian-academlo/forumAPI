@@ -2,7 +2,7 @@ const AuthServices = require("../services/auth.services");
 const UsersServices = require("../services/user.services");
 const transporter = require("../utils/mailer");
 
-const createUser = async (req, res) => {
+const createUser = async (req, res, next) => {
   try {
     const newUser = req.body;
 

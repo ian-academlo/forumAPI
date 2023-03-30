@@ -1,0 +1,48 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Forum API",
+    "description": "Una API para que puedas contruir un foro usando publicaciones, respuestas y categorias para las mismas.",
+    "version": "1.4.0"
+  },
+  "paths": {
+    "/api/v1/users": {
+      "post": {
+        "tags": ["users"],
+        "description": "Con este endpoint podrás crear un nuevo usuario para la aplicación del foro",
+        "summary": "Crea un nuevo usuario en el foro",
+        "requestBody": {
+          "description": "Los campos para crear un nuevo usuario son: username, email y password",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/login" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "login": {
+        "description": "la contraseña debe tener al menos 7 caracteres",
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "ianncus"
+          },
+          "email": {
+            "type": "string",
+            "example": "ian.rosas@academlo.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "1234567"
+          }
+        }
+      }
+    }
+  }
+}

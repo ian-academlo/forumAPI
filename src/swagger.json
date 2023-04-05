@@ -22,15 +22,89 @@
         },
         "responses": {
           "201": {
-            "description": "created",
+            "description": "created"
+          },
+          "409": {
+            "description": "conflict",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": { "type": "string", "example": "OK" }
+                    "name": {
+                      "type": "string",
+                      "example": "validation error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Database connection error"
+                    }
                   }
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{id}": {
+      "put": {
+        "tags": ["users"],
+        "summary": "Actualiza el nombre y apellido de un usuario",
+        "description": "para actualizar el nombre y apellido de un usuario necesitas mandar en el body, name y el lastname y como path param el id de usuario que se va a actulizar",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "El id del usuario que se va a actualizar"
+          }
+        ],
+        "requestBody": {
+          "description": "shalalala shalalala",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/updateUser" }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/v1/posts?categoryId=###&limit=###&offset=###": {
+      "get": {
+        "summary": "shalsalslals",
+        "tags": ["posts"],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "description": "selecciona la categoria para devolver las publicaciones",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "offset",
+            "description": "Desde donde empezará a filtrar la respuesta",
+            "in": "query",
+            "required": false
+          },
+          {
+            "name": "limit",
+            "description": "cantidad de publicaciones que se responderá",
+            "in": "query",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/posts" }
               }
             }
           }
@@ -55,6 +129,53 @@
           "password": {
             "type": "string",
             "example": "1234567"
+          }
+        }
+      },
+      "updateUser": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Ian"
+          },
+          "lastname": {
+            "type": "string",
+            "example": "Rosas"
+          }
+        }
+      },
+      "posts": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "example": 6
+            },
+            "title": {
+              "type": "string",
+              "example": "Pregunta sobre namekusein"
+            },
+            "author_name": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "Ian Rosas"
+                }
+              }
+            },
+            "category": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "bases de datos"
+                }
+              }
+            }
           }
         }
       }

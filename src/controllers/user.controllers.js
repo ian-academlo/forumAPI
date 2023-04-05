@@ -7,7 +7,7 @@ const createUser = async (req, res, next) => {
     const newUser = req.body;
 
     const result = await UsersServices.create(newUser);
-    res.status(201).json(result);
+    res.status(201).send();
     // TODO generar un token
     const { id, email, username } = result;
     const token = await AuthServices.genToken({
